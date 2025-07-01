@@ -4,6 +4,27 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const icon =document.getElementsByClassName("like-glyph");
+icon.addEventListener("click",postLiker)
+function postLiker(e) {
+  mimicServerCall()
+    .catch(function(error) {
+      const err = document.getElementById("modal")
+      err.classList.remove("hidden");
+      setTimeout(function() {
+        err.classList.add("hidden");
+      }, 3000);
+    })
+    .then(function(response) {
+      if (icon.innerHTML === EMPTY_HEART) {
+        icon.innerHTML = FULL_HEART;
+        icon.classList.add("activated-heart");
+      } else {
+        icon.innerHTML = EMPTY_HEART;
+        icon.classList.remove("activated-heart");
+      }
+    });
+}
 
 
 
